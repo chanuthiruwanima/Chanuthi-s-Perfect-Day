@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css" rel="stylesheet">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">   
+  <link href="https://fonts.googleapis.com/css2?family=Andika:ital,wght@0,400;0,700;1,400;1,700&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+   <title>Perfect Day</title>
+  </head>
+
+  <body>
+    <header class="hero">
+      
+      <div class="topnav">
+    
+</div>
+    </header>
+
+    <div class="container">
+      <div class="mixtape-container">
+        <div class="mixtape-inner">
+          <div class="mixtape-inner-middle">
+            <div class="mixtape-inner-tape">
+              <div class="mixtape-inner-tape-ring">
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+            <div class="mixtape-inner-tape">
+              <div class="mixtape-inner-tape-ring">
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mixtape-bottom">
+          <div class="mixtape-bottom-circle"></div>
+          <div class="mixtape-bottom-circle"></div>
+          <div class="mixtape-bottom-circle"></div>
+          <div class="mixtape-bottom-circle"></div>
+        </div>
+        <div class="mixtape-detail">
+          <div class="screw"></div>
+          <div class="screw"></div>
+          <div class="screw"></div>
+          <div class="screw"></div>
+          <span class="tape-hole"></span><span class="tape-hole"></span><span class="tape-hole"></span>
+        </div>
+      </div>
+
+      <div class="mixtape">
+        <div id="details">
+          <div id="detail-text">
+            <h1 id="song-name">Name Of Song</h1>
+            <p id="artist-name">Artist name</p>
+          </div>
+        </div>
+        <div id="music-control">
+          <button id="previous" onclick="prevSong()">
+            <i class="fas fa-step-backward"></i>
+          </button>
+          <button id="play">
+            <i class="fas fa-solid fa-play"></i>
+          </button>
+          <button id="next" onclick="nextSong()">
+            <i class="fas fa-step-forward"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+<div id="booth">  
+    <div id="postcard">
+      <img id="letter" src="Postcard.png">
+      <img id="top-img" src="Flowers.png">
+      <img id="bottom-img" src="Camera.png">
+    </div>
+
+    <section class="mini-notebook">
+  <div class="notebook-header">
+    <h2>Notebook</h2>
+  </div>
+  <textarea class="notebook-input" placeholder="Tell me something new..."></textarea>
+</section>
+
+</div>
+
+
+    <h5>. ݁₊ ⊹ . ݁ Dopamine Menu⟡ ݁ . ⊹ ₊ ݁.</h5>
+    <div id="dopamine-menu">
+      <div class="card">
+        <h4>𓈒𓏸.°• Starters</h4>
+        <ul>
+          <li>Grab a snack</li>
+          <li>Sketch something</li>
+          <li>Listen to your favourite song</li>
+          <li>Quick stretch</li>
+          <li>Do a crossword</li>
+          <li>Walk around</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <h4> 𖤓˚࿔ Mains</h4>
+        <ul>
+          <li>Learn about a new topic for an hour</li>
+          <li>Go for a run</li>
+          <li>Try a new recipe</li>
+          <li>Make crafts</li>
+          <li>Crochet/Embroidery</li>
+          <li>Organize your room</li>
+          <li>Learn a new hobby</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h4> ⋆.˚𓇼 Sides</h4>
+        <ul>
+          <li>Play a playlist fit for your mood</li>
+          <li>Go out in nature</li>
+          <li>Listen to a podcast</li>
+          <li>Try on a new outfit</li>
+          <li>Make a vlog</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h4>⋆˚꩜｡ Desserts</h4>
+        <ul>
+          <li>Watch a movie</li>
+          <li>Go to a cafe</li>
+          <li>Play a game</li>
+          <li>Hangout with a friend</li>
+          <li>Build lego</li>
+          <li>Photoshoot</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h4> 𑣲⋆Specials</h4>
+        <ul>
+          <li>Go to the beach</li>
+          <li>Play games at the arcade</li>
+          <li>Tour a museum</li>
+          <li>Host a dinner party</li>
+          <li>Go to a bookstore</li>
+        </ul>
+      </div>
+    </div>
+<div class="timer container">
+
+  <div class="timer-display" id="timer-display">00:00</div>
+  <div class="preset-buttons">
+    <button class="timer-btn" data-minutes="5">5 Min</button>
+    <button class="timer-btn" data-minutes="15">15 Min</button>
+    <button class="timer-btn" data-minutes="30">30 Min</button>
+  </div>
+  <button id="pause-button" style="display: none;"><i class="fas fa-solid fa-play"></i></button>
+</div>
+<script src="script.js"></script>
+  </body>
+</html>
