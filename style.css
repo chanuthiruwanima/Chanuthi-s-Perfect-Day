@@ -63,76 +63,88 @@ h1 {
   margin-bottom: 25px;
 }
 
+
 #dopamine-menu {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 2.5rem 2rem;
+  gap: 20px;
   max-width: 850px;
   margin: 0 auto 40px auto;
-  padding: 40px 35px;
-  background-color: #fcf8f2; 
-  border: 1px solid #e2a89f; 
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(186, 74, 74, 0.06);
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
 
+
 .card {
-  background: transparent;
-  box-shadow: none;
-  padding: 0;
+  background-color: #F89982;
+  border-radius: 12px;
+  padding: 24px 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .card:hover {
-  transform: none;
-  box-shadow: none;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 
 .card.full-width {
   grid-column: 1 / -1;
-  margin-top: 10px;
+  width: 50%;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
+
 .card h4 {
-  margin-top: 0;
-  margin-bottom: 12px;
-  color: #ba4a4a;
-  font-size: 1.15rem;
+  width: 100%;
+  margin: 0 0 12px 0;
+  padding-bottom: 8px;
+  color: #2A2A2A;
+  font-size: 1.2rem;
   font-family: "Andika", sans-serif;
   text-transform: uppercase;
   letter-spacing: 2px;
-  border-bottom: none;
-  padding-bottom: 0;
+  border-bottom: 2px dashed rgba(42, 42, 42, 0.3);
 }
+
+
 .card ul {
   margin: 0;
-  padding: 0;
-  list-style: none;
+  padding-left: 20px;
+  list-style: disc !important;
 }
 
 .card li {
-  color: #ba4a4a;
+  color: #2A2A2A;
   font-family: "Caveat", cursive;
   font-style: italic;
-  margin-bottom: 6px;
   font-size: 1.25rem;
-  line-height: 1.4;
+  line-height: 1.5;
+  margin-bottom: 4px;
+  list-style: disc !important;
+}
+
+.card li::marker {
+  color: #2A2A2A;
 }
 
 
 @media (max-width: 650px) {
   #dopamine-menu {
     grid-template-columns: 1fr;
-    padding: 25px 20px;
-    gap: 2rem;
   }
 
   .card.full-width {
     grid-column: auto;
+    width: 100%;
   }
 }
 
