@@ -53,60 +53,87 @@ h1 {
   background-color: #c87a5e;
 }
 
+
+.menu-heading {
+  font-size: 2.2rem;
+  color: #ba4a4a; 
+  text-align: center;
+  font-family: "Andika", sans-serif;
+  margin-top: 40px;
+  margin-bottom: 25px;
+}
+
 #dopamine-menu {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
-  max-width: 1200px;
-  justify-content: center;
-  margin: 0 auto;
-  padding: 10px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem 2rem;
+  max-width: 850px;
+  margin: 0 auto 40px auto;
+  padding: 40px 35px;
+  background-color: #fcf8f2; 
+  border: 1px solid #e2a89f; 
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(186, 74, 74, 0.06);
 }
 
 .card {
-  background-color: #fa9a85;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+  transform: none;
+  box-shadow: none;
+}
+
+
+.card.full-width {
+  grid-column: 1 / -1;
+  margin-top: 10px;
 }
 
 .card h4 {
   margin-top: 0;
   margin-bottom: 12px;
-  color: #2f2118;
-  font-size: 1.25rem;
-  font-family: "Andika";
+  color: #ba4a4a;
+  font-size: 1.15rem;
+  font-family: "Andika", sans-serif;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  border-bottom: 2px dashed #ff6b6b;
-  padding-bottom: 6px;
+  letter-spacing: 2px;
+  border-bottom: none;
+  padding-bottom: 0;
 }
-
 .card ul {
   margin: 0;
-  padding-left: 20px;
+  padding: 0;
+  list-style: none;
 }
 
 .card li {
-  color: #2f2118;
+  color: #ba4a4a;
   font-family: "Caveat", cursive;
-  margin-bottom: 8px;
-  font-size: 0.95rem;
+  font-style: italic;
+  margin-bottom: 6px;
+  font-size: 1.25rem;
   line-height: 1.4;
 }
 
-h5 {
-  font-size: 50px;
-  color: #ff6b6b;
-  text-align: center;
-  font-family: "Andika";
+
+@media (max-width: 650px) {
+  #dopamine-menu {
+    grid-template-columns: 1fr;
+    padding: 25px 20px;
+    gap: 2rem;
+  }
+
+  .card.full-width {
+    grid-column: auto;
+  }
 }
 
 .container {
@@ -398,4 +425,129 @@ h5 {
   outline: none;
   padding: 0;
   margin-top: 10px;
+}
+
+
+.randomizer-container {
+  text-align: center;
+  margin: 25px 0 10px 0;
+}
+
+#random-btn {
+  background-color: #e29578;
+  color: #ffffff;
+  border: none;
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  font-family: "Andika", sans-serif;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+#random-btn:hover {
+  background-color: #e25678;
+  transform: translateY(-2px);
+}
+
+.plan-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(47, 33, 24, 0.5); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(3px);
+}
+
+.plan-overlay.hidden {
+  display: none;
+}
+
+
+.plan-card {
+  background-color: #fffaf3;
+  border: 3px solid #fa9a85;
+  border-radius: 16px;
+  padding: 25px 30px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+  text-align: center;
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.plan-card h3 {
+  font-family: "Andika", sans-serif;
+  color: #ff6b6b;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+.plan-card ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  text-align: left;
+}
+
+.plan-card li {
+  font-family: "Caveat", cursive;
+  font-size: 1.25rem;
+  color: #2f2118;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  background-color: #fa9a85;
+  border-radius: 8px;
+}
+
+.plan-card li strong {
+  font-family: "Andika", sans-serif;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: #ffffff;
+  display: block;
+  margin-bottom: 2px;
+}
+
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.8rem;
+  color: #2f2118;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: #ff6b6b;
+}
+
+.reroll-btn {
+  background-color: #83c5be;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-family: "Andika", sans-serif;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.reroll-btn:hover {
+  background-color: #6baaa3;
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }

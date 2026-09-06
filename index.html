@@ -86,68 +86,85 @@
 
 </div>
 
+<div class="randomizer-container">
+  <button id="random-btn" onclick="generateRandomPlan()">Pick My Perfect Day Plan</button>
+</div>
 
-    <h5>. ݁₊ ⊹ . ݁ Dopamine Menu⟡ ݁ . ⊹ ₊ ݁.</h5>
-    <div id="dopamine-menu">
-      <div class="card">
-        <h4>𓈒𓏸.°• Starters</h4>
-        <ul>
-          <li>Grab a snack</li>
-          <li>Sketch something</li>
-          <li>Listen to your favourite song</li>
-          <li>Quick stretch</li>
-          <li>Do a crossword</li>
-          <li>Walk around</li>
-        </ul>
-      </div>
-      
-      <div class="card">
-        <h4> 𖤓˚࿔ Mains</h4>
-        <ul>
-          <li>Learn about a new topic for an hour</li>
-          <li>Go for a run</li>
-          <li>Try a new recipe</li>
-          <li>Make crafts</li>
-          <li>Crochet/Embroidery</li>
-          <li>Organize your room</li>
-          <li>Learn a new hobby</li>
-        </ul>
-      </div>
+<div id="plan" class="plan-overlay hidden">
+  <div class="plan-card">
+    <span class="close-btn" onclick="closePlanModal()">&times;</span>
+    <h3>Your Perfect Day Plan</h3>
+    <ul id="plan-results-list"></ul>
+    <button class="reroll-btn" onclick="generateRandomPlan()">Spin Again</button>
+  </div>
+</div>
 
-      <div class="card">
-        <h4> ⋆.˚𓇼 Sides</h4>
-        <ul>
-          <li>Play a playlist fit for your mood</li>
-          <li>Go out in nature</li>
-          <li>Listen to a podcast</li>
-          <li>Try on a new outfit</li>
-          <li>Make a vlog</li>
-        </ul>
-      </div>
+<h5 class="menu-heading">. ݁₊ ⊹ . ݁ Dopamine Menu ⟡ ݁ . ⊹ ₊ ݁.</h5>
 
-      <div class="card">
-        <h4>⋆˚꩜｡ Desserts</h4>
-        <ul>
-          <li>Watch a movie</li>
-          <li>Go to a cafe</li>
-          <li>Play a game</li>
-          <li>Hangout with a friend</li>
-          <li>Build lego</li>
-          <li>Photoshoot</li>
-        </ul>
-      </div>
+<div id="dopamine-menu">
+  <div class="card">
+    <h4>Starters</h4>
+    <ul>
+      <li>Grab a snack</li>
+      <li>Sketch something</li>
+      <li>Read an article</li>
+      <li>Listen to your favourite song</li>
+      <li>Quick stretch</li>
+      <li>Do a crossword</li>
+      <li>Walk around</li>
+    </ul>
+  </div>
 
-      <div class="card">
-        <h4> 𑣲⋆Specials</h4>
-        <ul>
-          <li>Go to the beach</li>
-          <li>Play games at the arcade</li>
-          <li>Tour a museum</li>
-          <li>Host a dinner party</li>
-          <li>Go to a bookstore</li>
-        </ul>
-      </div>
-    </div>
+  <div class="card">
+    <h4>Mains</h4>
+    <ul>
+      <li>Learn about a new topic for an hour</li>
+      <li>Go for a run</li>
+      <li>Try a new recipe</li>
+      <li>Make crafts</li>
+      <li>Crochet / Embroidery</li>
+      <li>Organize your room</li>
+      <li>Learn a new hobby</li>
+      <li>Scrapbook or journal</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h4>Sides</h4>
+    <ul>
+      <li>Play a playlist fit for your mood</li>
+      <li>Enjoy a refreshing drink</li>
+      <li>Go out in nature</li>
+      <li>Listen to a podcast</li>
+      <li>Try on a new outfit</li>
+      <li>Make a vlog</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h4>Desserts</h4>
+    <ul>
+      <li>Watch a movie</li>
+      <li>Go to a cafe</li>
+      <li>Play a game</li>
+      <li>Hangout with a friend</li>
+      <li>Photoshoot</li>
+      <li>Watch the sunset / sunrise</li>
+    </ul>
+  </div>
+
+  <div class="card full-width">
+    <h4>Specials</h4>
+    <ul>
+      <li>Go to the beach</li>
+      <li>Play games at the arcade</li>
+      <li>Tour a museum</li>
+      <li>Host a dinner party</li>
+      <li>Go to a bookstore</li>
+    </ul>
+  </div>
+</div>
+
 <div class="timer container">
 
   <div class="timer-display" id="timer-display">00:00</div>

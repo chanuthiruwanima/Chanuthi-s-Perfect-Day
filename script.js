@@ -145,3 +145,29 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+function generateRandomPlan() {
+  const cards = document.querySelectorAll("#dopamine-menu .card");
+  const planList = document.getElementById("plan-results-list");
+  
+  planList.innerHTML = ""; 
+
+  cards.forEach((card) => {
+    const categoryTitle = card.querySelector("h4").textContent.trim();
+    const items = Array.from(card.querySelectorAll("li")).map((li) => li.textContent.trim());
+    
+    if (items.length > 0) {
+      const randomItem = items[Math.floor(Math.random() * items.length)];
+      
+      const li = document.createElement("li");
+      li.innerHTML = `<strong>${categoryTitle}</strong> ${randomItem}`;
+      planList.appendChild(li);
+    }
+  });
+
+  document.getElementById("plan").classList.remove("hidden");
+}
+
+function closePlanModal() {
+  document.getElementById("plan").classList.add("hidden");
+}
