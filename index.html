@@ -9,6 +9,7 @@
    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">   
   <link href="https://fonts.googleapis.com/css2?family=Andika:ital,wght@0,400;0,700;1,400;1,700&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
    <title>Perfect Day</title>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   </head>
 
   <body>
@@ -70,20 +71,56 @@
         </div>
       </div>
     </div>
+
 <div id="booth">  
-    <div id="postcard">
-      <img id="letter" src="Postcard.png">
-      <img id="top-img" src="Flowers.png">
-      <img id="bottom-img" src="Camera.png">
-    </div>
-
-    <section class="mini-notebook">
-  <div class="notebook-header">
-    <h2>Notebook</h2>
+  <div id="postcard">
+    <img id="letter" src="Postcard.png">
+    <img id="top-img" src="Flowers.png">
+    <img id="bottom-img" src="Camera.png">
   </div>
-  <textarea class="notebook-input" placeholder="Tell me something new..."></textarea>
-</section>
+<section class="photobooth-container">
+  <div class="booth-header">
+    <h2>Memory Booth</h2>
+    <p id="slot-indicator" class="slot-indicator">Photo 1 of 3</p>
+  </div>
 
+  <div id="camera-view" class="view-box">
+    <video id="webcam" autoplay playsinline></video>
+    <button id="snap-btn" onclick="takeSinglePhoto()">📸 Snap Photo</button>
+    <div id="countdown" class="countdown-overlay hidden">3</div>
+  </div>
+
+  <div id="canvas-view" class="view-box-workspace hidden">
+    <div id="strip-workspace" class="photo-strip">
+      <div class="strip-photo-container"><img id="photo-1" class="strip-img" /></div>
+      <div class="strip-photo-container"><img id="photo-2" class="strip-img" /></div>
+      <div class="strip-photo-container"><img id="photo-3" class="strip-img" /></div>
+      <input type="text" id="strip-caption" class="strip-caption-input" placeholder="Add a caption..." maxLength="30" />
+      <div id="sticker-layer" class="sticker-layer"></div>
+    </div>
+  </div>
+
+    <div id="custom-tools" class="custom-tools hidden">
+    <p class="sticker-instruction">Click a sticker, then drag it!</p>
+    <div class="sticker-palette">
+      <button onclick="spawnSticker('🌸')">🌸</button>
+      <button onclick="spawnSticker('⭐')">⭐</button>
+      <button onclick="spawnSticker('🎀')">🎀</button>
+      <button onclick="spawnSticker('🧸')">🧸</button>
+      <button onclick="spawnSticker('✨')">✨</button>
+      <button onclick="spawnSticker('💌')">💌</button>
+    </div>
+  </div>
+
+  <div class="booth-controls">
+    <label for="upload-photo" id="upload-label" class="booth-btn">📁 Upload Photo</label>
+    <input type="file" id="upload-photo" accept="image/*" onchange="handleSingleUpload(event)" style="display:none;">
+
+    <button id="retake-btn" class="booth-btn hidden" onclick="resetBooth()">🔄 Reset</button>
+    <button id="download-btn" class="booth-btn hidden" onclick="downloadStrip()">💾 Save Strip</button>
+  </div>
+
+</section>
 </div>
 
 <div class="randomizer-container">
@@ -103,7 +140,7 @@
 
 <div id="dopamine-menu">
   <div class="card">
-    <h4>Starters</h4>
+    <h4>⊹ ࣪ ˖Starters</h4>
     <ul>
       <li>Grab a snack</li>
       <li>Sketch something</li>
@@ -116,7 +153,7 @@
   </div>
 
   <div class="card">
-    <h4>Mains</h4>
+    <h4>⋆˚ᝰ˚⋆Mains</h4>
     <ul>
       <li>Learn about a new topic for an hour</li>
       <li>Go for a run</li>
@@ -130,7 +167,7 @@
   </div>
 
   <div class="card">
-    <h4>Sides</h4>
+    <h4>°࿔*･Sides</h4>
     <ul>
       <li>Play a playlist fit for your mood</li>
       <li>Enjoy a refreshing drink</li>
@@ -142,7 +179,7 @@
   </div>
 
   <div class="card">
-    <h4>Desserts</h4>
+    <h4>⋆.𝜗𝜚 Desserts</h4>
     <ul>
       <li>Watch a movie</li>
       <li>Go to a cafe</li>
@@ -154,7 +191,7 @@
   </div>
 
   <div class="card full-width">
-    <h4>Specials</h4>
+    <h4>⋆˚꩜｡ Specials</h4>
     <ul>
       <li>Go to the beach</li>
       <li>Play games at the arcade</li>
