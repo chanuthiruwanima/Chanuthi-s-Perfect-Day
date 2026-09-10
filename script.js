@@ -3,7 +3,6 @@ let audio = null;
 let playing = false;
 let play_pause_btn = document.getElementById("play");
 
-
 let songs = [
   {
      song_name: "Music on the Radio",
@@ -68,19 +67,22 @@ function prevSong() {
   }
 } 
 
-play_pause_btn.addEventListener("click", () => {
-  if (!playing) {
-     audio.play();
-     play_pause_btn.innerHTML = '<i class="fas fa-solid fa-pause"></i>';
-     playing = true;
-  } else {
-     audio.pause();
-     play_pause_btn.innerHTML = '<i class="fas fa-solid fa-play"></i>';
-     playing = false;
-  }
-});
+if (play_pause_btn) {
+  play_pause_btn.addEventListener("click", () => {
+    if (!playing) {
+       audio.play();
+       play_pause_btn.innerHTML = '<i class="fas fa-solid fa-pause"></i>';
+       playing = true;
+    } else {
+       audio.pause();
+       play_pause_btn.innerHTML = '<i class="fas fa-solid fa-play"></i>';
+       playing = false;
+    }
+  });
+}
 
 setSong(current_song);
+
 document.addEventListener("DOMContentLoaded", function () {
   const timerDisplay = document.getElementById("timer-display");
   const presetButtons = document.querySelectorAll(".timer-btn");
@@ -120,24 +122,26 @@ document.addEventListener("DOMContentLoaded", function () {
     
     remainingSeconds = minutes * 60;
     isPaused = false;
-    pauseButton.innerHTML = '<i class="fas fa-solid fa-pause"></i>';;
+    pauseButton.innerHTML = '<i class="fas fa-solid fa-pause"></i>';
     pauseButton.style.display = "inline-block";
     
     timerDisplay.textContent = formatTime(remainingSeconds);
     runTimer();
   }
 
-  pauseButton.addEventListener("click", () => {
-    if (remainingSeconds <= 0) return;
+  if (pauseButton) {
+    pauseButton.addEventListener("click", () => {
+      if (remainingSeconds <= 0) return;
 
-    if (isPaused) {
-      isPaused = false;
-      pauseButton.innerHTML = '<i class="fas fa-solid fa-pause"></i>';
-    } else {
-      isPaused = true;
-      pauseButton.innerHTML = '<i class="fas fa-solid fa-play"></i>';
-    }
-  });
+      if (isPaused) {
+        isPaused = false;
+        pauseButton.innerHTML = '<i class="fas fa-solid fa-pause"></i>';
+      } else {
+        isPaused = true;
+        pauseButton.innerHTML = '<i class="fas fa-solid fa-play"></i>';
+      }
+    });
+  }
 
   presetButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -171,13 +175,17 @@ function generateRandomPlan() {
 
 function closePlanModal() {
   document.getElementById("plan").classList.add("hidden");
-}const video = document.getElementById('webcam');
+}
+
+const video = document.getElementById('webcam');
 let capturedPhotos = [];
 
 async function initCamera() {
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
-    video.srcObject = stream;
+    if (navigator.mediaDevices && video) {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+      video.srcObject = stream;
+    }
   } catch (err) {
     console.warn("Camera access denied or unavailable:", err);
   }
@@ -238,10 +246,31 @@ function renderStrip() {
 
   document.getElementById('camera-view').classList.add('hidden');
   document.getElementById('upload-label').classList.add('hidden');
-  document.getElementById('canvas-view').classList.remove('hidden');
+  
+  document.getElementById('postcard-strip-preview').classList.remove('hidden');
+  document.getElementById('entry-fields').classList.remove('hidden');
+
   document.getElementById('retake-btn').classList.remove('hidden');
+  document.getElementById('save-entry-btn').classList.remove('hidden');
   document.getElementById('download-btn').classList.remove('hidden');
   document.getElementById('custom-tools').classList.remove('hidden');
+}
+
+function resetBooth() {
+  capturedPhotos = [];
+  document.getElementById('sticker-layer').innerHTML = '';
+  document.getElementById('slot-indicator').innerText = 'Photo 1 of 3';
+  
+  document.getElementById('camera-view').classList.remove('hidden');
+  document.getElementById('upload-label').classList.remove('hidden');
+  
+  document.getElementById('postcard-strip-preview').classList.add('hidden');
+  document.getElementById('entry-fields').classList.add('hidden');
+
+  document.getElementById('retake-btn').classList.add('hidden');
+  document.getElementById('save-entry-btn').classList.add('hidden');
+  document.getElementById('download-btn').classList.add('hidden');
+  document.getElementById('custom-tools').classList.add('hidden');
 }
 
 function spawnSticker(emoji) {
@@ -299,17 +328,89 @@ function makeElementDraggable(elm) {
   }
 }
 
-function resetBooth() {
-  capturedPhotos = [];
-  document.getElementById('sticker-layer').innerHTML = '';
-  document.getElementById('slot-indicator').innerText = 'Photo 1 of 3';
+let journalEntries = JSON.parse(localStorage.getItem('perfectDayEntries')) || [];
+
+function toggleJournalDrawer() {
+  const drawer = document.getElementById('journal-drawer');
+  drawer.classList.toggle('hidden');
+  if (!drawer.classList.contains('hidden')) {
+    renderJournalHistory();
+  }
+}
+
+function startNewJournalEntry() {
+  document.getElementById('entry-title').value = '';
+  document.getElementById('entry-note').value = '';
+
+  resetBooth();
+  document.querySelector('.photobooth-container').scrollIntoView({ behavior: 'smooth' });
+}
+
+function saveFullScrapbookEntry(photoStripDataUrl) {
+  const title = document.getElementById('entry-title').value || 'My Perfect Day';
+  const note = document.getElementById('entry-note').value || '';
   
-  document.getElementById('camera-view').classList.remove('hidden');
-  document.getElementById('upload-label').classList.remove('hidden');
-  document.getElementById('canvas-view').classList.add('hidden');
-  document.getElementById('retake-btn').classList.add('hidden');
-  document.getElementById('download-btn').classList.add('hidden');
-  document.getElementById('custom-tools').classList.add('hidden');
+  const newEntry = {
+    id: Date.now(),
+    date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+    title: title,
+    note: note,
+    stripImage: photoStripDataUrl
+  };
+
+  journalEntries.unshift(newEntry);
+  localStorage.setItem('perfectDayEntries', JSON.stringify(journalEntries));
+  
+  alert('Entry saved to your Journal Drawer!');
+  renderJournalHistory();
+}
+
+function renderJournalHistory() {
+  const historyContainer = document.getElementById('journal-history-list');
+  historyContainer.innerHTML = '';
+
+  if (journalEntries.length === 0) {
+    historyContainer.innerHTML = '<p class="empty-msg">No journal entries yet. Tap "New Entry" to create one!</p>';
+    return;
+  }
+
+  journalEntries.forEach(entry => {
+    const card = document.createElement('div');
+    card.className = 'history-card';
+    card.innerHTML = `
+      <div class="history-card-header">
+        <span class="history-date">${entry.date}</span>
+        <h4>${escapeHtml(entry.title)}</h4>
+      </div>
+      <div class="history-card-body">
+        <img src="${entry.stripImage}" alt="Saved Photo Strip" class="history-strip-thumb" />
+        <p class="history-note">${escapeHtml(entry.note)}</p>
+      </div>
+      <button class="delete-entry-btn" onclick="deleteJournalEntry(${entry.id})">🗑️ Delete</button>
+    `;
+    historyContainer.appendChild(card);
+  });
+}
+
+function deleteJournalEntry(id) {
+  journalEntries = journalEntries.filter(entry => entry.id !== id);
+  localStorage.setItem('perfectDayEntries', JSON.stringify(journalEntries));
+  renderJournalHistory();
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.innerText = text;
+  return div.innerHTML;
+}
+
+function saveCurrentEntryWithoutDownload() {
+  const stripElement = document.getElementById('strip-workspace');
+  
+  html2canvas(stripElement, { scale: 2 }).then(canvas => {
+    const stripDataUrl = canvas.toDataURL('image/png');
+    saveFullScrapbookEntry(stripDataUrl);
+  });
 }
 
 function downloadStrip() {
@@ -373,8 +474,8 @@ function downloadStrip() {
 
           ctx.font = `${28 * scale}px sans-serif`;
           ctx.fillText(sticker.innerText, x, y + (24 * scale));
+        });
 
-         
         const captionInput = document.getElementById('strip-caption');
         if (captionInput && captionInput.value) {
           ctx.font = `${20 * (stripWidth / 160)}px 'Caveat', cursive`;
@@ -382,12 +483,14 @@ function downloadStrip() {
           ctx.textAlign = 'center';
           ctx.fillText(captionInput.value, stripWidth / 2, stripHeight - 20);
         }
-        });
 
+        const stripDataUrl = canvas.toDataURL('image/png');
         const link = document.createElement('a');
         link.download = 'memory-strip.png';
-        link.href = canvas.toDataURL('image/png');
+        link.href = stripDataUrl;
         link.click();
+
+        saveFullScrapbookEntry(stripDataUrl);
       }
     };
   });

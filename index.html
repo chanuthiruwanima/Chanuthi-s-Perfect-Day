@@ -72,55 +72,74 @@
       </div>
     </div>
 
-<div id="booth">  
-  <div id="postcard">
-    <img id="letter" src="Postcard.png">
-    <img id="top-img" src="Flowers.png">
-    <img id="bottom-img" src="Camera.png">
-  </div>
-<section class="photobooth-container">
-  <div class="booth-header">
-    <h2>Memory Booth</h2>
-    <p id="slot-indicator" class="slot-indicator">Photo 1 of 3</p>
+<div id="booth">
+
+  <div class="journal-controls">
+    <button id="open-drawer-btn" class="journal-btn" onclick="toggleJournalDrawer()">📖 Open Journal</button>
+    <button id="new-entry-btn" class="journal-btn highlight" onclick="startNewJournalEntry()">✏️ New Entry</button>
   </div>
 
-  <div id="camera-view" class="view-box">
-    <video id="webcam" autoplay playsinline></video>
-    <button id="snap-btn" onclick="takeSinglePhoto()">📸 Snap Photo</button>
-    <div id="countdown" class="countdown-overlay hidden">3</div>
-  </div>
+  <div class="workspace-card">
+    
+    <section class="photobooth-container">
+      <div class="booth-header">
+        <h2>Memory Booth</h2>
+        <p id="slot-indicator" class="slot-indicator">Photo 1 of 3</p>
+      </div>
 
-  <div id="canvas-view" class="view-box-workspace hidden">
-    <div id="strip-workspace" class="photo-strip">
-      <div class="strip-photo-container"><img id="photo-1" class="strip-img" /></div>
-      <div class="strip-photo-container"><img id="photo-2" class="strip-img" /></div>
-      <div class="strip-photo-container"><img id="photo-3" class="strip-img" /></div>
-      <input type="text" id="strip-caption" class="strip-caption-input" placeholder="Add a caption..." maxLength="30" />
-      <div id="sticker-layer" class="sticker-layer"></div>
+      <div id="camera-view" class="view-box">
+        <video id="webcam" autoplay playsinline></video>
+        <button id="snap-btn" onclick="takeSinglePhoto()">📸 Snap Photo</button>
+        <div id="countdown" class="countdown-overlay hidden">3</div>
+      </div>
+
+      <div class="booth-controls">
+        <label for="upload-photo" id="upload-label" class="booth-btn">📁 Upload Photo</label>
+        <input type="file" id="upload-photo" accept="image/*" onchange="handleSingleUpload(event)" style="display:none;">
+
+        <button id="retake-btn" class="booth-btn hidden" onclick="resetBooth()">🔄 Reset</button>
+        <button id="save-entry-btn" class="booth-btn hidden" onclick="saveCurrentEntryWithoutDownload()">📖 Save to Journal</button>
+        <button id="download-btn" class="booth-btn hidden" onclick="downloadStrip()">💾 Download Strip</button>
+      </div>
+
+      <div id="custom-tools" class="custom-tools hidden">
+        <p class="sticker-instruction">Click a sticker, then drag it onto your strip!</p>
+        <div class="sticker-palette">
+          <button onclick="spawnSticker('🌸')">🌸</button>
+          <button onclick="spawnSticker('⭐')">⭐</button>
+          <button onclick="spawnSticker('🎀')">🎀</button>
+          <button onclick="spawnSticker('🧸')">🧸</button>
+          <button onclick="spawnSticker('✨')">✨</button>
+          <button onclick="spawnSticker('💌')">💌</button>
+        </div>
+      </div>
+    </section>
+
+    <div id="postcard-strip-preview" class="postcard-strip-preview hidden">
+      <div id="strip-workspace" class="photo-strip">
+        <div class="strip-photo-container"><img id="photo-1" class="strip-img" /></div>
+        <div class="strip-photo-container"><img id="photo-2" class="strip-img" /></div>
+        <div class="strip-photo-container"><img id="photo-3" class="strip-img" /></div>
+        <div id="sticker-layer" class="sticker-layer"></div>
+      </div>
     </div>
-  </div>
 
-    <div id="custom-tools" class="custom-tools hidden">
-    <p class="sticker-instruction">Click a sticker, then drag it!</p>
-    <div class="sticker-palette">
-      <button onclick="spawnSticker('🌸')">🌸</button>
-      <button onclick="spawnSticker('⭐')">⭐</button>
-      <button onclick="spawnSticker('🎀')">🎀</button>
-      <button onclick="spawnSticker('🧸')">🧸</button>
-      <button onclick="spawnSticker('✨')">✨</button>
-      <button onclick="spawnSticker('💌')">💌</button>
+    <div id="entry-fields" class="entry-fields hidden">
+      <input type="text" id="entry-title" placeholder="Entry Title..." class="journal-input title" />
+      <textarea id="entry-note" placeholder="Write about your day..." class="journal-textarea"></textarea>
     </div>
+
   </div>
+</div>
 
-  <div class="booth-controls">
-    <label for="upload-photo" id="upload-label" class="booth-btn">📁 Upload Photo</label>
-    <input type="file" id="upload-photo" accept="image/*" onchange="handleSingleUpload(event)" style="display:none;">
-
-    <button id="retake-btn" class="booth-btn hidden" onclick="resetBooth()">🔄 Reset</button>
-    <button id="download-btn" class="booth-btn hidden" onclick="downloadStrip()">💾 Save Strip</button>
+<div id="journal-drawer" class="journal-drawer hidden">
+  <div class="drawer-header">
+    <h3>My Journal</h3>
+    <button class="close-drawer-btn" onclick="toggleJournalDrawer()">✕</button>
   </div>
-
-</section>
+  <div id="journal-history-list" class="journal-history-list">
+    <p class="empty-msg">No entries saved yet!</p>
+  </div>
 </div>
 
 <div class="randomizer-container">
