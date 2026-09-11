@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css" rel="stylesheet">
    <link rel="preconnect" href="https://fonts.googleapis.com">
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,12 +14,6 @@
   </head>
 
   <body>
-    <header class="hero">
-      
-      <div class="topnav">
-    
-</div>
-    </header>
 
     <div class="container">
       <div class="mixtape-container">
@@ -152,6 +147,15 @@
     <h3>Your Perfect Day Plan</h3>
     <ul id="plan-results-list"></ul>
     <button class="reroll-btn" onclick="generateRandomPlan()">Spin Again</button>
+  </div>
+</div>
+
+<div id="custom-alert-modal" class="custom-modal-overlay hidden">
+  <div class="custom-modal-card">
+    <span class="modal-emoji">📷</span>
+    <h3 id="custom-modal-title">Memory Made!</h3>
+    <p id="custom-modal-message">Your scrapbook entry has been saved to your journal drawer.</p>
+    <button class="modal-close-btn" onclick="closeCustomAlert()">Awesome!</button>
   </div>
 </div>
 

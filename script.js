@@ -31,6 +31,59 @@ let songs = [
   },  
 ];
 
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+function playShutterSound() {
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  
+  osc.type = 'sine';
+  osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+  osc.frequency.exponentialRampToValueAtTime(200, audioCtx.currentTime + 0.08);
+  
+  gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+  
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  
+  osc.start();
+  osc.stop(audioCtx.currentTime + 0.08);
+}
+
+function playTimerEndSound() {
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  
+  [523.25, 659.25, 783.99].forEach((freq, idx) => {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    
+    osc.frequency.value = freq;
+    gain.gain.setValueAtTime(0.15, audioCtx.currentTime + (idx * 0.12));
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (idx * 0.12) + 0.3);
+    
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    
+    osc.start(audioCtx.currentTime + (idx * 0.12));
+    osc.stop(audioCtx.currentTime + (idx * 0.12) + 0.3);
+  });
+}
+
+function showCustomAlert(title, message, emoji = '✨') {
+  document.getElementById('custom-modal-title').innerText = title;
+  document.getElementById('custom-modal-message').innerText = message;
+  document.querySelector('.modal-emoji').innerText = emoji;
+  
+  document.getElementById('custom-alert-modal').classList.remove('hidden');
+}
+
+function closeCustomAlert() {
+  document.getElementById('custom-alert-modal').classList.add('hidden');
+}
+
 function setSong(index) {
   if (audio) {
      audio.pause();
@@ -111,7 +164,8 @@ document.addEventListener("DOMContentLoaded", function () {
           clearInterval(countdownInterval);
           timerDisplay.textContent = "00:00";
           pauseButton.style.display = "none";
-          alert("Time's up!");
+          playTimerEndSound();
+          showCustomAlert("Time's Up!", "Your timer has reached 00:00.", "⏰");
         }
       }
     }, 1000);
@@ -179,20 +233,29 @@ function closePlanModal() {
 
 const video = document.getElementById('webcam');
 let capturedPhotos = [];
+let cameraAvailable = false;
 
 async function initCamera() {
   try {
     if (navigator.mediaDevices && video) {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
       video.srcObject = stream;
+      video.play();
+      cameraAvailable = true;
     }
   } catch (err) {
     console.warn("Camera access denied or unavailable:", err);
+    cameraAvailable = false;
+    showCustomAlert("Camera Disabled", "Camera permission missing! You can still use the Upload Photo button.", "📷");
   }
 }
 initCamera();
 
 async function takeSinglePhoto() {
+  if (!cameraAvailable) {
+    showCustomAlert("Camera Required", "Please enable camera access or upload an image manually.", "⚠️");
+    return;
+  }
   if (capturedPhotos.length >= 3) return;
 
   const countdownEl = document.getElementById('countdown');
@@ -204,6 +267,8 @@ async function takeSinglePhoto() {
   }
   countdownEl.innerText = "📸";
 
+  playShutterSound();
+
   const tempCanvas = document.createElement('canvas');
   tempCanvas.width = video.videoWidth || 300;
   tempCanvas.height = video.videoHeight || 225;
@@ -211,7 +276,10 @@ async function takeSinglePhoto() {
   ctx.drawImage(video, 0, 0, tempCanvas.width, tempCanvas.height);
   
   addPhotoToStrip(tempCanvas.toDataURL('image/png'));
-  countdownEl.classList.add('hidden');
+
+  setTimeout(() => {
+    countdownEl.classList.add('hidden');
+  }, 300);
 }
 
 function handleSingleUpload(event) {
@@ -361,7 +429,7 @@ function saveFullScrapbookEntry(photoStripDataUrl) {
   journalEntries.unshift(newEntry);
   localStorage.setItem('perfectDayEntries', JSON.stringify(journalEntries));
   
-  alert('Entry saved to your Journal Drawer!');
+  showCustomAlert('Memory Saved!', 'Entry added to your Journal Drawer!', '💖');
   renderJournalHistory();
 }
 
