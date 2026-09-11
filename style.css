@@ -857,7 +857,6 @@ h1 {
 
 .journal-drawer.hidden {
   transform: translateX(100%);
-  display: block !important; 
 }
 
 .drawer-header {
@@ -1024,4 +1023,47 @@ h1 {
 @keyframes popUpIn {
   0% { transform: scale(0.85); opacity: 0; }
   100% { transform: scale(1); opacity: 1; }
+}
+
+.fullscreen-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(47, 33, 24, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.modal-glass-container {
+  position: relative;
+  background-color: #fffaf3;
+  border-radius: 16px;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.close-modal-btn {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  font-family: "Andika", sans-serif;
+  color: #e25678;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.close-modal-btn:hover {
+  opacity: 0.8;
 }

@@ -2,239 +2,279 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <link rel="stylesheet" href="style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfect Day</title>
+
+    <link rel="stylesheet" href="style.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css" rel="stylesheet">
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">   
-  <link href="https://fonts.googleapis.com/css2?family=Andika:ital,wght@0,400;0,700;1,400;1,700&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
-   <title>Perfect Day</title>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Andika:ital,wght@0,400;0,700;1,400;1,700&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   </head>
 
   <body>
+    <main class="main">
 
-    <div class="container">
-      <div class="mixtape-container">
-        <div class="mixtape-inner">
-          <div class="mixtape-inner-middle">
-            <div class="mixtape-inner-tape">
-              <div class="mixtape-inner-tape-ring">
-                <span></span><span></span><span></span><span></span><span></span>
+      <header class="main-header">
+        <div class="randomizer-container">
+          <button id="random-btn" onclick="generateRandomPlan()">Plan My Perfect Day</button>
+        </div>
+      </header>
+
+      <section class="mixtape-section container">
+        <div class="mixtape-container">
+          <div class="mixtape-inner">
+            <div class="mixtape-inner-middle">
+              <div class="mixtape-inner-tape">
+                <div class="mixtape-inner-tape-ring">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
               </div>
-            </div>
-            <div class="mixtape-inner-tape">
-              <div class="mixtape-inner-tape-ring">
-                <span></span><span></span><span></span><span></span><span></span>
+              <div class="mixtape-inner-tape">
+                <div class="mixtape-inner-tape-ring">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="mixtape-bottom">
-          <div class="mixtape-bottom-circle"></div>
-          <div class="mixtape-bottom-circle"></div>
-          <div class="mixtape-bottom-circle"></div>
-          <div class="mixtape-bottom-circle"></div>
-        </div>
-        <div class="mixtape-detail">
-          <div class="screw"></div>
-          <div class="screw"></div>
-          <div class="screw"></div>
-          <div class="screw"></div>
-          <span class="tape-hole"></span><span class="tape-hole"></span><span class="tape-hole"></span>
-        </div>
-      </div>
-
-      <div class="mixtape">
-        <div id="details">
-          <div id="detail-text">
-            <h1 id="song-name">Name Of Song</h1>
-            <p id="artist-name">Artist name</p>
+          <div class="mixtape-bottom">
+            <div class="mixtape-bottom-circle"></div>
+            <div class="mixtape-bottom-circle"></div>
+            <div class="mixtape-bottom-circle"></div>
+            <div class="mixtape-bottom-circle"></div>
+          </div>
+          <div class="mixtape-detail">
+            <div class="screw"></div>
+            <div class="screw"></div>
+            <div class="screw"></div>
+            <div class="screw"></div>
+            <span class="tape-hole"></span><span class="tape-hole"></span><span class="tape-hole"></span>
           </div>
         </div>
-        <div id="music-control">
-          <button id="previous" onclick="prevSong()">
-            <i class="fas fa-step-backward"></i>
-          </button>
-          <button id="play">
-            <i class="fas fa-solid fa-play"></i>
-          </button>
-          <button id="next" onclick="nextSong()">
-            <i class="fas fa-step-forward"></i>
-          </button>
+
+        <div class="mixtape">
+          <div id="details">
+            <div id="detail-text">
+              <h1 id="song-name">Name Of Song</h1>
+              <p id="artist-name">Artist name</p>
+            </div>
+          </div>
+          <div id="music-control">
+            <button id="previous" onclick="prevSong()">
+              <i class="fas fa-step-backward"></i>
+            </button>
+            <button id="play">
+              <i class="fas fa-solid fa-play"></i>
+            </button>
+            <button id="next" onclick="nextSong()">
+              <i class="fas fa-step-forward"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="tools-container">
+        <h3>Day Manager</h3>
+        <p class="drawer-subtext">Click on an item to try it</p>
+
+        <div class="tools-grid">
+          <div class="drawer-card" onclick="openPhotoboothDrawer()">
+            <div class="drawer-icon"><img src="Camera.png"></div>
+            <h4>Memory Photobooth</h4>
+          </div>
+
+          <div class="drawer-card" onclick="toggleJournalDrawer()">
+            <div class="drawer-icon"><img src="Postcard.png"></div>
+            <h4>Journal</h4>
+          </div>
+
+          <div class="drawer-card" onclick="openTimerDrawer()">
+            <div class="drawer-icon"><img src="Coffee.png"></div>
+            <h4>Focus Timer</h4>
+          </div>
+        </div>
+      </section>
+
+      <section class="dopamine-section">
+        <h5 class="menu-heading">. ݁₊ ⊹ . ݁ Dopamine Menu ⟡ ݁ . ⊹ ₊ ݁.</h5>
+
+        <div id="dopamine-menu">
+          <div class="card">
+            <h4>⊹ ࣪ ˖Starters</h4>
+            <ul>
+              <li>Grab a snack</li>
+              <li>Sketch something</li>
+              <li>Read an article</li>
+              <li>Listen to your favourite song</li>
+              <li>Quick stretch</li>
+              <li>Do a crossword</li>
+              <li>Walk around</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h4>⋆˚ᝰ˚⋆Mains</h4>
+            <ul>
+              <li>Learn about a new topic for an hour</li>
+              <li>Go for a run</li>
+              <li>Try a new recipe</li>
+              <li>Make crafts</li>
+              <li>Crochet / Embroidery</li>
+              <li>Organize your room</li>
+              <li>Learn a new hobby</li>
+              <li>Scrapbook or journal</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h4>°࿔*･Sides</h4>
+            <ul>
+              <li>Play a playlist fit for your mood</li>
+              <li>Enjoy a refreshing drink</li>
+              <li>Go out in nature</li>
+              <li>Listen to a podcast</li>
+              <li>Try on a new outfit</li>
+              <li>Make a vlog</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h4>⋆.𝜗𝜚 Desserts</h4>
+            <ul>
+              <li>Watch a movie</li>
+              <li>Go to a cafe</li>
+              <li>Play a game</li>
+              <li>Hangout with a friend</li>
+              <li>Photoshoot</li>
+              <li>Watch the sunset / sunrise</li>
+            </ul>
+          </div>
+
+          <div class="card full-width">
+            <h4>⋆˚꩜｡ Specials</h4>
+            <ul>
+              <li>Go to the beach</li>
+              <li>Play games at the arcade</li>
+              <li>Tour a museum</li>
+              <li>Host a dinner party</li>
+              <li>Go to a bookstore</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="photobooth-modal" class="fullscreen-modal hidden">
+      <div class="modal-glass-container">
+        <button class="close-modal-btn" onclick="closePhotoboothDrawer()">✕ Close Booth</button>
+        
+        <div id="booth">
+          <div class="journal-controls">
+            <button id="open-drawer-btn" class="journal-btn" onclick="toggleJournalDrawer()">📖 Open Journal</button>
+            <button id="new-entry-btn" class="journal-btn highlight" onclick="startNewJournalEntry()">✏️ New Entry</button>
+          </div>
+
+          <div class="workspace-card">
+            <section class="photobooth-container">
+              <div class="booth-header">
+                <h2>Memory Booth</h2>
+                <p id="slot-indicator" class="slot-indicator">Photo 1 of 3</p>
+              </div>
+
+              <div id="camera-view" class="view-box">
+                <video id="webcam" autoplay playsinline></video>
+                <button id="snap-btn" onclick="takeSinglePhoto()">📸 Snap Photo</button>
+                <div id="countdown" class="countdown-overlay hidden">3</div>
+              </div>
+
+              <div class="booth-controls">
+                <label for="upload-photo" id="upload-label" class="booth-btn">📁 Upload Photo</label>
+                <input type="file" id="upload-photo" accept="image/*" onchange="handleSingleUpload(event)" style="display:none;">
+
+                <button id="retake-btn" class="booth-btn hidden" onclick="resetBooth()">🔄 Reset</button>
+                <button id="save-entry-btn" class="booth-btn hidden" onclick="saveCurrentEntryWithoutDownload()">📖 Save to Journal</button>
+                <button id="download-btn" class="booth-btn hidden" onclick="downloadStrip()">💾 Download Strip</button>
+              </div>
+
+              <div id="custom-tools" class="custom-tools hidden">
+                <p class="sticker-instruction">Click a sticker, then drag it onto your strip!</p>
+                <div class="sticker-palette">
+                  <button onclick="spawnSticker('🌸')">🌸</button>
+                  <button onclick="spawnSticker('⭐')">⭐</button>
+                  <button onclick="spawnSticker('🎀')">🎀</button>
+                  <button onclick="spawnSticker('🧸')">🧸</button>
+                  <button onclick="spawnSticker('✨')">✨</button>
+                  <button onclick="spawnSticker('💌')">💌</button>
+                </div>
+              </div>
+            </section>
+
+            <div id="postcard-strip-preview" class="postcard-strip-preview hidden">
+              <div id="strip-workspace" class="photo-strip">
+                <div class="strip-photo-container"><img id="photo-1" class="strip-img" alt="Strip Photo 1" /></div>
+                <div class="strip-photo-container"><img id="photo-2" class="strip-img" alt="Strip Photo 2" /></div>
+                <div class="strip-photo-container"><img id="photo-3" class="strip-img" alt="Strip Photo 3" /></div>
+                <div id="sticker-layer" class="sticker-layer"></div>
+              </div>
+            </div>
+
+            <div id="entry-fields" class="entry-fields hidden">
+              <input type="text" id="entry-title" placeholder="Entry Title..." class="journal-input title" />
+              <textarea id="entry-note" placeholder="Write about your day..." class="journal-textarea"></textarea>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
 
-<div id="booth">
-
-  <div class="journal-controls">
-    <button id="open-drawer-btn" class="journal-btn" onclick="toggleJournalDrawer()">📖 Open Journal</button>
-    <button id="new-entry-btn" class="journal-btn highlight" onclick="startNewJournalEntry()">✏️ New Entry</button>
-  </div>
-
-  <div class="workspace-card">
-    
-    <section class="photobooth-container">
-      <div class="booth-header">
-        <h2>Memory Booth</h2>
-        <p id="slot-indicator" class="slot-indicator">Photo 1 of 3</p>
+    <div id="journal-drawer" class="journal-drawer hidden">
+      <div class="drawer-header">
+        <h3>📖 My Journal</h3>
+        <button class="close-drawer-btn" onclick="toggleJournalDrawer()">✕</button>
       </div>
-
-      <div id="camera-view" class="view-box">
-        <video id="webcam" autoplay playsinline></video>
-        <button id="snap-btn" onclick="takeSinglePhoto()">📸 Snap Photo</button>
-        <div id="countdown" class="countdown-overlay hidden">3</div>
+      <div id="journal-history-list" class="journal-history-list">
+        <p class="empty-msg">No entries saved yet!</p>
       </div>
+    </div>
 
-      <div class="booth-controls">
-        <label for="upload-photo" id="upload-label" class="booth-btn">📁 Upload Photo</label>
-        <input type="file" id="upload-photo" accept="image/*" onchange="handleSingleUpload(event)" style="display:none;">
-
-        <button id="retake-btn" class="booth-btn hidden" onclick="resetBooth()">🔄 Reset</button>
-        <button id="save-entry-btn" class="booth-btn hidden" onclick="saveCurrentEntryWithoutDownload()">📖 Save to Journal</button>
-        <button id="download-btn" class="booth-btn hidden" onclick="downloadStrip()">💾 Download Strip</button>
-      </div>
-
-      <div id="custom-tools" class="custom-tools hidden">
-        <p class="sticker-instruction">Click a sticker, then drag it onto your strip!</p>
-        <div class="sticker-palette">
-          <button onclick="spawnSticker('🌸')">🌸</button>
-          <button onclick="spawnSticker('⭐')">⭐</button>
-          <button onclick="spawnSticker('🎀')">🎀</button>
-          <button onclick="spawnSticker('🧸')">🧸</button>
-          <button onclick="spawnSticker('✨')">✨</button>
-          <button onclick="spawnSticker('💌')">💌</button>
+    <div id="timer-modal" class="fullscreen-modal hidden">
+      <div class="modal-glass-container timer-modal-content">
+        <button class="close-modal-btn" onclick="closeTimerDrawer()">✕ Close Timer</button>
+        <h3>⏳ Focus Timer</h3>
+        
+        <div class="timer container">
+          <div class="timer-display" id="timer-display">00:00</div>
+          <div class="preset-buttons">
+            <button class="timer-btn" data-minutes="5">5 Min</button>
+            <button class="timer-btn" data-minutes="15">15 Min</button>
+            <button class="timer-btn" data-minutes="30">30 Min</button>
+          </div>
+          <button id="pause-button" style="display: none;"><i class="fas fa-solid fa-play"></i></button>
         </div>
       </div>
-    </section>
+    </div>
 
-    <div id="postcard-strip-preview" class="postcard-strip-preview hidden">
-      <div id="strip-workspace" class="photo-strip">
-        <div class="strip-photo-container"><img id="photo-1" class="strip-img" /></div>
-        <div class="strip-photo-container"><img id="photo-2" class="strip-img" /></div>
-        <div class="strip-photo-container"><img id="photo-3" class="strip-img" /></div>
-        <div id="sticker-layer" class="sticker-layer"></div>
+    <div id="plan" class="plan-overlay hidden">
+      <div class="plan-card">
+        <span class="close-btn" onclick="closePlanModal()">&times;</span>
+        <h3>Your Perfect Day Plan</h3>
+        <ul id="plan-results-list"></ul>
+        <button class="reroll-btn" onclick="generateRandomPlan()">Spin Again</button>
       </div>
     </div>
 
-    <div id="entry-fields" class="entry-fields hidden">
-      <input type="text" id="entry-title" placeholder="Entry Title..." class="journal-input title" />
-      <textarea id="entry-note" placeholder="Write about your day..." class="journal-textarea"></textarea>
+    <div id="custom-alert-modal" class="custom-modal-overlay hidden">
+      <div class="custom-modal-card">
+        <span class="modal-emoji">📷</span>
+        <h3 id="custom-modal-title">Memory Made!</h3>
+        <p id="custom-modal-message">Your scrapbook entry has been saved to your journal drawer.</p>
+        <button class="modal-close-btn" onclick="closeCustomAlert()">☆</button>
+      </div>
     </div>
 
-  </div>
-</div>
-
-<div id="journal-drawer" class="journal-drawer hidden">
-  <div class="drawer-header">
-    <h3>My Journal</h3>
-    <button class="close-drawer-btn" onclick="toggleJournalDrawer()">✕</button>
-  </div>
-  <div id="journal-history-list" class="journal-history-list">
-    <p class="empty-msg">No entries saved yet!</p>
-  </div>
-</div>
-
-<div class="randomizer-container">
-  <button id="random-btn" onclick="generateRandomPlan()">Pick My Perfect Day Plan</button>
-</div>
-
-<div id="plan" class="plan-overlay hidden">
-  <div class="plan-card">
-    <span class="close-btn" onclick="closePlanModal()">&times;</span>
-    <h3>Your Perfect Day Plan</h3>
-    <ul id="plan-results-list"></ul>
-    <button class="reroll-btn" onclick="generateRandomPlan()">Spin Again</button>
-  </div>
-</div>
-
-<div id="custom-alert-modal" class="custom-modal-overlay hidden">
-  <div class="custom-modal-card">
-    <span class="modal-emoji">📷</span>
-    <h3 id="custom-modal-title">Memory Made!</h3>
-    <p id="custom-modal-message">Your scrapbook entry has been saved to your journal drawer.</p>
-    <button class="modal-close-btn" onclick="closeCustomAlert()">Awesome!</button>
-  </div>
-</div>
-
-<h5 class="menu-heading">. ݁₊ ⊹ . ݁ Dopamine Menu ⟡ ݁ . ⊹ ₊ ݁.</h5>
-
-<div id="dopamine-menu">
-  <div class="card">
-    <h4>⊹ ࣪ ˖Starters</h4>
-    <ul>
-      <li>Grab a snack</li>
-      <li>Sketch something</li>
-      <li>Read an article</li>
-      <li>Listen to your favourite song</li>
-      <li>Quick stretch</li>
-      <li>Do a crossword</li>
-      <li>Walk around</li>
-    </ul>
-  </div>
-
-  <div class="card">
-    <h4>⋆˚ᝰ˚⋆Mains</h4>
-    <ul>
-      <li>Learn about a new topic for an hour</li>
-      <li>Go for a run</li>
-      <li>Try a new recipe</li>
-      <li>Make crafts</li>
-      <li>Crochet / Embroidery</li>
-      <li>Organize your room</li>
-      <li>Learn a new hobby</li>
-      <li>Scrapbook or journal</li>
-    </ul>
-  </div>
-
-  <div class="card">
-    <h4>°࿔*･Sides</h4>
-    <ul>
-      <li>Play a playlist fit for your mood</li>
-      <li>Enjoy a refreshing drink</li>
-      <li>Go out in nature</li>
-      <li>Listen to a podcast</li>
-      <li>Try on a new outfit</li>
-      <li>Make a vlog</li>
-    </ul>
-  </div>
-
-  <div class="card">
-    <h4>⋆.𝜗𝜚 Desserts</h4>
-    <ul>
-      <li>Watch a movie</li>
-      <li>Go to a cafe</li>
-      <li>Play a game</li>
-      <li>Hangout with a friend</li>
-      <li>Photoshoot</li>
-      <li>Watch the sunset / sunrise</li>
-    </ul>
-  </div>
-
-  <div class="card full-width">
-    <h4>⋆˚꩜｡ Specials</h4>
-    <ul>
-      <li>Go to the beach</li>
-      <li>Play games at the arcade</li>
-      <li>Tour a museum</li>
-      <li>Host a dinner party</li>
-      <li>Go to a bookstore</li>
-    </ul>
-  </div>
-</div>
-
-<div class="timer container">
-
-  <div class="timer-display" id="timer-display">00:00</div>
-  <div class="preset-buttons">
-    <button class="timer-btn" data-minutes="5">5 Min</button>
-    <button class="timer-btn" data-minutes="15">15 Min</button>
-    <button class="timer-btn" data-minutes="30">30 Min</button>
-  </div>
-  <button id="pause-button" style="display: none;"><i class="fas fa-solid fa-play"></i></button>
-</div>
-<script src="script.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
