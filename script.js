@@ -178,13 +178,21 @@ async function initCamera() {
   }
 }
 
+let isTakingPhoto = false;
+
 async function takeSinglePhoto() {
+  
+  if (isTakingPhoto || capturedPhotos.length >= 3) return;
   const videoEl = document.getElementById('webcam');
   if (!cameraAvailable || !videoEl) {
     showCustomAlert("Camera Required", "Please enable camera access or upload an image manually.", "⚠️");
     return;
   }
-  if (capturedPhotos.length >= 3) return;
+
+  isTakingPhoto = true; 
+
+  const snapBtn = document.getElementById('snap-btn');
+  if (snapBtn) snapBtn.disabled = true;
 
   const countdownEl = document.getElementById('countdown');
   if (countdownEl) countdownEl.classList.remove('hidden');
@@ -207,6 +215,8 @@ async function takeSinglePhoto() {
 
   setTimeout(() => {
     if (countdownEl) countdownEl.classList.add('hidden');
+    if (snapBtn) snapBtn.disabled = false;
+    isTakingPhoto = false; 
   }, 300);
 }
 
@@ -716,3 +726,47 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+function updateClock() {
+  const now = new Date();
+  document.getElementById('current-time').textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  document.getElementById('current-date').textContent = now.toLocaleDateString([], { weekday: 'long', month: 'short', day: 'numeric' });
+}
+
+function getWeatherDetails(code) {
+  if (code === 0) return { desc: "Clear Sky", icon: "☀️" };
+  if (code >= 1 && code <= 3) return { desc: "Partly Cloudy", icon: "⛅" };
+  if (code >= 45 && code <= 48) return { desc: "Foggy", icon: "🌫️" };
+  if (code >= 51 && code <= 67) return { desc: "Rainy", icon: "🌧️" };
+  if (code >= 71 && code <= 77) return { desc: "Snowy", icon: "❄️" };
+  if (code >= 80 && code <= 82) return { desc: "Showers", icon: "🌦️" };
+  if (code >= 95) return { desc: "Thunderstorm", icon: "⛈️" };
+  return { desc: "Mild", icon: "🌡️" };
+}
+
+function fetchWeather(lat, lon) {
+  fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`)
+    .then(res => res.json())
+    .then(data => {
+      const weather = data.current_weather;
+      document.getElementById('current-temp').textContent = `${Math.round(weather.temperature)}°C`;
+      const { desc, icon } = getWeatherDetails(weather.weathercode);
+      document.getElementById('weather-desc').textContent = desc;
+      document.querySelector('.weather-icon').textContent = icon;
+    })
+    .catch(() => {
+      document.getElementById('weather-desc').textContent = "Unavailable";
+    });
+}
+
+setInterval(updateClock, 1000);
+updateClock();
+
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(
+    pos => fetchWeather(pos.coords.latitude, pos.coords.longitude),
+    () => fetchWeather(51.5074, -0.1278)
+  );
+} else {
+  fetchWeather(51.5074, -0.1278);
+}

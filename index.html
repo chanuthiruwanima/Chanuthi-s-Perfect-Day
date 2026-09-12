@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfect Day</title>
+    <title>Recipe for a Perfect Day</title>
 
     <link rel="stylesheet" href="style.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css" rel="stylesheet">
@@ -74,6 +74,26 @@
           <button id="random-btn" onclick="generateRandomPlan()">Plan My Perfect Day</button>
         </div>
       </header>
+<section class="widget-banner">
+  <div class="time-widget">
+    <span id="current-time"></span>
+    <span id="current-date"></span>
+  </div>
+  <div class="widget-divider"></div>
+  <div class="weather-widget">
+    <span class="weather-icon">☀️</span>
+    <div class="weather-info">
+      <span id="current-temp">--°C</span>
+      <span id="weather-desc">Loading...</span>
+    </div>
+  </div>
+</section>
+<div class="scroll-indicator">
+  <span class="scroll-text">scroll down for more</span>
+  <span class="scroll-arrow">↓</span>
+</div>
+
+</section>
       
       <section class="tools-container">
         <h3>Day Manager</h3>
