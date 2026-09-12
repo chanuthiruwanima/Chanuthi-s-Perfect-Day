@@ -17,12 +17,6 @@
   <body>
     <main class="main">
 
-      <header class="main-header">
-        <div class="randomizer-container">
-          <button id="random-btn" onclick="generateRandomPlan()">Plan My Perfect Day</button>
-        </div>
-      </header>
-
       <section class="mixtape-section container">
         <div class="mixtape-container">
           <div class="mixtape-inner">
@@ -75,22 +69,32 @@
         </div>
       </section>
 
+            <header class="main-header">
+        <div class="randomizer-container">
+          <button id="random-btn" onclick="generateRandomPlan()">Plan My Perfect Day</button>
+        </div>
+      </header>
+      
       <section class="tools-container">
         <h3>Day Manager</h3>
         <p class="drawer-subtext">Click on an item to try it</p>
 
         <div class="tools-grid">
-          <div class="drawer-card" onclick="openPhotoboothDrawer()">
+          <div class="center-piece">
+      <img src="Postcard.png"  />
+             </div>
+
+          <div class="drawer-card" id ="camera-widget">
             <div class="drawer-icon"><img src="Camera.png"></div>
             <h4>Memory Photobooth</h4>
           </div>
 
-          <div class="drawer-card" onclick="toggleJournalDrawer()">
-            <div class="drawer-icon"><img src="Postcard.png"></div>
+          <div class="drawer-card"  id="journal-widget" >
+            <div class="drawer-icon"><img src="Journal.png"></div>
             <h4>Journal</h4>
           </div>
 
-          <div class="drawer-card" onclick="openTimerDrawer()">
+          <div class="drawer-card"  id="coffee-widget">
             <div class="drawer-icon"><img src="Coffee.png"></div>
             <h4>Focus Timer</h4>
           </div>
@@ -171,11 +175,6 @@
         <button class="close-modal-btn" onclick="closePhotoboothDrawer()">✕ Close Booth</button>
         
         <div id="booth">
-          <div class="journal-controls">
-            <button id="open-drawer-btn" class="journal-btn" onclick="toggleJournalDrawer()">📖 Open Journal</button>
-            <button id="new-entry-btn" class="journal-btn highlight" onclick="startNewJournalEntry()">✏️ New Entry</button>
-          </div>
-
           <div class="workspace-card">
             <section class="photobooth-container">
               <div class="booth-header">
@@ -240,22 +239,31 @@
       </div>
     </div>
 
-    <div id="timer-modal" class="fullscreen-modal hidden">
-      <div class="modal-glass-container timer-modal-content">
-        <button class="close-modal-btn" onclick="closeTimerDrawer()">✕ Close Timer</button>
-        <h3>⏳ Focus Timer</h3>
-        
-        <div class="timer container">
-          <div class="timer-display" id="timer-display">00:00</div>
-          <div class="preset-buttons">
-            <button class="timer-btn" data-minutes="5">5 Min</button>
-            <button class="timer-btn" data-minutes="15">15 Min</button>
-            <button class="timer-btn" data-minutes="30">30 Min</button>
-          </div>
-          <button id="pause-button" style="display: none;"><i class="fas fa-solid fa-play"></i></button>
-        </div>
+   <div id="timer-modal" class="fullscreen-modal hidden">
+  <div class="timer-popup-card">
+    <button class="close-modal-btn" onclick="closeTimerDrawer()">✕ Close</button>
+
+    <div class="timer-left">
+      <img src="Coffee.png" class="coffee-img" />
+    </div>
+
+    <div class="timer-right">
+      <div class="preset-buttons">
+        <button class="timer-btn" data-minutes="5">5 Min</button>
+        <button class="timer-btn" data-minutes="15">15 Min</button>
+        <button class="timer-btn" data-minutes="30">30 Min</button>
+      </div>
+
+      <div id="timer-display" class="timer-display">00:00</div>
+
+      <div class="timer-bottom-controls">
+        <button id="pause-button" style="display:none;">
+          <i class="fas fa-pause"></i> Pause
+        </button>
       </div>
     </div>
+  </div>
+</div>
 
     <div id="plan" class="plan-overlay hidden">
       <div class="plan-card">
