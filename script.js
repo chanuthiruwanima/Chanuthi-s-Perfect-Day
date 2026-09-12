@@ -245,11 +245,13 @@ function renderStrip() {
 
   const cameraView = document.getElementById('camera-view');
   const uploadLabel = document.getElementById('upload-label');
+  const snapBtn = document.getElementById('snap-btn');
   const preview = document.getElementById('postcard-strip-preview');
 
   if (cameraView) cameraView.classList.add('hidden');
   if (uploadLabel) uploadLabel.classList.add('hidden');
   if (preview) preview.classList.remove('hidden');
+  if (snapBtn) snapBtn.classList.add('hidden');
 
   document.getElementById('entry-fields')?.classList.remove('hidden');
   document.getElementById('retake-btn')?.classList.remove('hidden');
@@ -265,6 +267,7 @@ function resetBooth() {
   
   document.getElementById('camera-view').classList.remove('hidden');
   document.getElementById('upload-label').classList.remove('hidden');
+   document.getElementById('snap-btn').classList.remove('hidden');
   
   document.getElementById('postcard-strip-preview').classList.add('hidden');
   document.getElementById('entry-fields').classList.add('hidden');
@@ -503,25 +506,92 @@ function downloadStrip() {
 function generateRandomPlan() {
   const cards = document.querySelectorAll("#dopamine-menu .card");
   const planList = document.getElementById("plan-results-list");
-  
-  if (!planList) return;
-  planList.innerHTML = ""; 
+  const planEl = document.getElementById("plan");
+  const randomBtn = document.getElementById("random-btn");
 
+  if (!planList) return;
+  if (planEl) planEl.classList.remove("hidden");
+
+  if (randomBtn) randomBtn.disabled = true;
+
+  const categoriesData = [];
   cards.forEach((card) => {
     const categoryTitle = card.querySelector("h4").textContent.trim();
     const items = Array.from(card.querySelectorAll("li")).map((li) => li.textContent.trim());
-    
     if (items.length > 0) {
-      const randomItem = items[Math.floor(Math.random() * items.length)];
-      
-      const li = document.createElement("li");
-      li.innerHTML = `<strong>${categoryTitle}</strong> ${randomItem}`;
-      planList.appendChild(li);
+      categoriesData.push({ title: categoryTitle, items });
     }
   });
 
-  const planEl = document.getElementById("plan");
-  if (planEl) planEl.classList.remove("hidden");
+  let currentSpin = 0;
+  const totalSpins = 12; 
+  const speed = 75;      
+
+  const shuffleInterval = setInterval(() => {
+    planList.innerHTML = "";
+
+    categoriesData.forEach((cat) => {
+      const tempItem = cat.items[Math.floor(Math.random() * cat.items.length)];
+      
+      const li = document.createElement("li");
+      li.className = "shuffling";
+      li.innerHTML = `<strong>${cat.title}:</strong> ${tempItem}`;
+      planList.appendChild(li);
+    });
+
+    currentSpin++;
+
+    if (currentSpin >= totalSpins) {
+      clearInterval(shuffleInterval);
+      planList.innerHTML = "";
+
+      categoriesData.forEach((cat) => {
+        const finalItem = cat.items[Math.floor(Math.random() * cat.items.length)];
+        
+        const li = document.createElement("li");
+        li.className = "revealed";
+        li.innerHTML = `<strong>${cat.title}:</strong> ${finalItem}`;
+        planList.appendChild(li);
+      });
+
+      if (randomBtn) randomBtn.disabled = false;
+      if (typeof createConfetti === "function") createConfetti();
+    }
+  }, speed);
+}
+
+function createConfetti() {
+  const modalCard = document.querySelector('.plan-card');
+  if (!modalCard) return;
+
+  const emojis = ['🌸', '🫧', '🐚', '🍹', '🌊', '☀️'];
+  const particleCount = 28;
+
+  for (let i = 0; i < particleCount; i++) {
+    const spark = document.createElement('span');
+    spark.classList.add('confetti-particle');
+    spark.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+
+    const angle = Math.random() * Math.PI * 2;
+    const velocity = 80 + Math.random() * 140; 
+    const x = Math.cos(angle) * velocity;
+    const y = Math.sin(angle) * velocity - 30;
+    const rotation = (Math.random() - 0.5) * 720; 
+    const scale = 0.8 + Math.random() * 0.8; 
+
+    spark.style.setProperty('--x', `${x}px`);
+    spark.style.setProperty('--y', `${y}px`);
+    spark.style.setProperty('--rot', `${rotation}deg`);
+    spark.style.setProperty('--scale', scale);
+
+    spark.style.animationDelay = `${Math.random() * 0.08}s`;
+
+    spark.style.left = '50%';
+    spark.style.top = '40%'; 
+
+    modalCard.appendChild(spark);
+    setTimeout(() => spark.remove(), 1100);
+  }
 }
 
 function closePlanModal() {

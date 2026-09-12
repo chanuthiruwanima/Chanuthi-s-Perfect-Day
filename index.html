@@ -172,7 +172,7 @@
 
     <div id="photobooth-modal" class="fullscreen-modal hidden">
       <div class="modal-glass-container">
-        <button class="close-modal-btn" onclick="closePhotoboothDrawer()">✕ Close Booth</button>
+        <button class="close-modal-btn" onclick="closePhotoboothDrawer()">✕</button>
         
         <div id="booth">
           <div class="workspace-card">
@@ -184,11 +184,11 @@
 
               <div id="camera-view" class="view-box">
                 <video id="webcam" autoplay playsinline></video>
-                <button id="snap-btn" onclick="takeSinglePhoto()">📸 Snap Photo</button>
                 <div id="countdown" class="countdown-overlay hidden">3</div>
               </div>
 
               <div class="booth-controls">
+                <button id="snap-btn" onclick="takeSinglePhoto()">📸 Snap Photo</button>
                 <label for="upload-photo" id="upload-label" class="booth-btn">📁 Upload Photo</label>
                 <input type="file" id="upload-photo" accept="image/*" onchange="handleSingleUpload(event)" style="display:none;">
 
@@ -201,10 +201,11 @@
                 <p class="sticker-instruction">Click a sticker, then drag it onto your strip!</p>
                 <div class="sticker-palette">
                   <button onclick="spawnSticker('🌸')">🌸</button>
-                  <button onclick="spawnSticker('⭐')">⭐</button>
-                  <button onclick="spawnSticker('🎀')">🎀</button>
-                  <button onclick="spawnSticker('🧸')">🧸</button>
-                  <button onclick="spawnSticker('✨')">✨</button>
+                  <button onclick="spawnSticker('🌊')">🌊</button>
+                  <button onclick="spawnSticker('🐚')">🐚</button>
+                  <button onclick="spawnSticker('🍹')">🍹</button>
+                  <button onclick="spawnSticker('☀️')">☀️</button>
+                  <button onclick="spawnSticker('🫧')">🫧</button>
                   <button onclick="spawnSticker('💌')">💌</button>
                 </div>
               </div>
